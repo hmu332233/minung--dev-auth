@@ -33,7 +33,7 @@ app.use(async (ctx, next) => {
   }
 });
 
-router.use('/api', require('./routes').routes());
+router.use('/api', require('./api').routes());
 app.use(router.routes());
 app.use(router.allowedMethods());
 
