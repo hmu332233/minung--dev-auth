@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start:dev": "NODE_ENV=development NODE_CONFIG_DIR=./configs/app node app.js",
+    "start:dev:raw": "NODE_ENV=development NODE_CONFIG_DIR=./configs/app node app.js",
+    "start:dev": "yarn start:dev:raw | pino-pretty",
     "test": "NODE_ENV=test NODE_CONFIG_DIR=./configs/app jest --detectOpenHandles --forceExit --config ./configs/jest.config.js",
     "test:coverage": "npm test --coverage",
     "prettier": "prettier --write --config ./configs/prettier.config.js '*.js'"
@@ -36,6 +37,7 @@
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "lint-staged": "^10.2.11",
+    "pino-pretty": "^4.1.0",
     "prettier": "^2.0.5"
   }
 }
