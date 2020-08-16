@@ -4,8 +4,9 @@ const CONSTANTS = {};
 
 const schema = new mongoose.Schema(
   {
+    id: { type: String, unique: true },
     email: { type: String },
-    password: { type: String },
+    password: { type: String, select: false },
   },
   {
     timestamps: true,

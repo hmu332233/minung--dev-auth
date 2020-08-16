@@ -25,12 +25,22 @@ app.use(async (ctx, next) => {
   } catch (err) {
     ctx.status = err.statusCode || err.status || 500;
     ctx.body = {
+      code: err.name,
       message: err.message,
-      code: err.code,
     };
 
     logger.error(err);
   }
+});
+
+// response handler
+app.use(async (ctx, next) => {
+  await next();
+  ctx.body = {
+    code: 'Success',
+    message: '',
+    body: ctx.body,
+  };
 });
 
 router.use('/api', require('./api').routes());

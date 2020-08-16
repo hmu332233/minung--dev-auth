@@ -1,5 +1,5 @@
 const { RequiredError } = require('./error');
 
 exports.isRequired = (parameterName) => {
-  throw new RequiredError(parameterName);
+  throw new RequiredError({ parameterName });
 };
