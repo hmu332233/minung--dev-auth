@@ -18,6 +18,19 @@ mongoose.Promise = global.Promise;
 mongoose.connect(Config.db.mongodb.url, Config.db.mongodb.opts);
 mongoose.set('debug', Config.db.mongodb.debug);
 
+// request log
+app.use(async (ctx, next) => {
+  logger.info({
+    method: ctx.request.method,
+    path: ctx.path,
+    params: {
+      query: ctx.query,
+      body: ctx.request.body,
+    },
+  });
+  return next();
+});
+
 // error handler
 app.use(async (ctx, next) => {
   try {
@@ -36,6 +49,12 @@ app.use(async (ctx, next) => {
 // response handler
 app.use(async (ctx, next) => {
   await next();
+
+  const status = ctx.status || 404;
+  if (status === 404) {
+    ctx.throw(404);
+  }
+
   ctx.body = {
     code: 'Success',
     message: '',
