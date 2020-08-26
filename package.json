@@ -6,12 +6,12 @@
     "start:dev:raw": "NODE_ENV=development NODE_CONFIG_DIR=./configs/app node app.js",
     "start:dev": "yarn start:dev:raw | pino-pretty",
     "test": "NODE_ENV=test NODE_CONFIG_DIR=./configs/app jest --detectOpenHandles --forceExit --config ./configs/jest.config.js",
-    "test:coverage": "npm test --coverage",
+    "test:coverage": "yarn test --coverage",
     "prettier": "prettier --write --config ./configs/prettier.config.js '*.js'"
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm test",
+      "pre-push": "yarn test",
       "pre-commit": "lint-staged"
     }
   },
