@@ -15,3 +15,13 @@ exports.verifyUserAndReturnToken = async ({ email, password }) => {
   });
   return token;
 };
+
+exports.verifyToken = async ({ token }) => {
+  try {
+    const decoded = jwt.verify(token, Config.auth.secret);
+    return decoded;
+  } catch (err) {
+    // TODO: 에러 처리
+    return null;
+  }
+};
